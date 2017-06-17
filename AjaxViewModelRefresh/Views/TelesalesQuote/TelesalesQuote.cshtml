@@ -1,0 +1,50 @@
+﻿@model AjaxViewModelRefresh.ViewModels.TelesalesQuoteViewModel
+@{
+    ViewBag.Title = "TelesalesQuote";
+}
+
+<h2>TelesalesQuote</h2>
+
+<head>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+
+    <div id="customerDetails">
+        <div>
+            @Html.LabelFor(c => c.Customer.FirstName)
+            @Html.TextBoxFor(c => c.Customer.FirstName)
+        </div>
+        <div>
+            @Html.LabelFor(c => c.Customer.Surname)
+            @Html.TextBoxFor(c => c.Customer.Surname)
+        </div>
+        <div>
+            <button id="saveCustomerDetails" type="button">Submit</button>
+        </div>
+    </div>
+
+    <div id="tariffDetails">
+
+    </div>
+
+</body>
+
+<script type="text/javascript">
+
+    $('#saveCustomerDetails').click(function () {
+        $.post('@Url.Action("UpdateViewModel", "TelesalesQuote")')
+            .done(function (vm) {
+                if (vm) {  // check if data is defined
+                    $("#tariffDetails").html(vm);
+                }
+            });
+    });
+
+</script>
+
+
+
